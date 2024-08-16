@@ -14,6 +14,9 @@
 
 - git remote add origin https://la_url_de_tu _repo
 
+- renombrar una rama git branch -m nombre_viejo nombre_nuevo
+- eliminar una rama git branch -d rama_a_eliminar
+
 ### para windows
 - git config  --global core.autocrlf true
 - git config  --global core.autocrlf input
