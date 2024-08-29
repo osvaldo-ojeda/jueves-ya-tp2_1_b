@@ -127,11 +127,14 @@ let deporte2 = deporte1;
 // console.log(`🚀 ~ deporte2:`, deporte2)
 
 // copia con datos complejos
+// copia superficial
 
 const data = {
   nombre: "chayane",
+  estudios: ["jardin"],
+  date: new Date(),
 };
-const info = data;
+// const info = data;
 // console.log(`🚀 ~ data:`, data===info)
 // info.nombre="elmer"
 // info.apellido="Perez"
@@ -145,8 +148,39 @@ const info2 = {
 // console.log(`🚀 ~ info2:`, info2===data)
 
 // copia spread
-const info3={...obj,...data}
+// const info3={...obj,...data}
+const info3 = { ...data };
+info3.nombre = "Ricky";
 // info3.apellido="Fernandez"
-console.log(`🚀 ~ data:`, data)
-console.log(`🚀 ~ info3:`, info3)
-console.log(`🚀 ~ info3:`, info3==data)
+
+// console.log(`🚀 ~ data:`, data)
+// console.log(`🚀 ~ info3:`, info3)
+// info3.estudios=[...data.estudios]
+// info3.estudios[1]="preescolar"
+// console.log(`🚀 ~ info3:`, info3.estudios[1])
+//  console.log(`🚀 ~ data:`, data)
+
+// deep copy
+// const info4 = JSON.stringify(data);
+// console.log(`🚀 ~ info4:`, info4);
+// const infoJson = JSON.parse(info4);
+// console.log(`🚀 ~ infoJson:`, infoJson);
+// infoJson.apellido = "Martinez";
+// console.log(`🚀 ~ data:`, data);
+
+// structuredClone
+// const infoStructure=structuredClone(data)
+// infoStructure.estudios.push("primaria")
+// console.log(`🚀 ~ infoStructure:`, infoStructure)
+// console.log(`🚀 ~ data:`, data);
+
+// function
+// var s="que onda?"
+// decirHola();
+// // let s=""
+// function decirHola() {
+//   let s = "que onda?";
+//   console.log("hola");
+// }
+// decirHola();
+// console.log(`🚀 ~ s:`, s);
