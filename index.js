@@ -1,21 +1,64 @@
-const decirHola = require("./funciones/decirHola");
-const numeroMayor=require("./funciones/numeroMayor")
-const sumaElementos=require("./funciones/sumaElementos")
-const abbrevName= require("./funciones/abbrevName");
-const filtradaDeArray = require("./funciones/filtradaDeArray");
+function inicio() {
+  console.log("inicio");
+}
+function time() {
+  setTimeout(() => {
+    console.log("time");
+  }, 0);
+}
 
+function promesa(boolean) {
+  return new Promise((resolve, reject) => {
+    if (boolean) {
+      resolve("Promesa exitosa");
+    } else {
+      reject("Promesa rechazada");
+    }
+  });
+}
 
-//  console.log(module)
-// console.log(require)
+function pokemon(name) {
+  return fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+}
 
-// decirHola();
-// numeroMayor([3,6,2])
-// sumaElementos([20,3,6,2])
-// abbrevName("Ricky Martin")
-const estudiantes = [
-     { nombre: "Juan", edad: 17, curso: "Primero" },
-     { nombre: "Ana", edad: 18, curso: "Segundo" },
-     { nombre: "Carlos", edad: 16, curso: "Primero" },
-     { nombre: "María", edad: 19, curso: "Tercero" },
-   ];
-filtradaDeArray(estudiantes)
+async function jsonPlaceHolder() {
+  try {
+    const fetchData = await fetch(
+      "https://jsonplaceholde.typicode.com/todos/1"
+    );
+    const data = await fetchData.json();
+    // return data;
+    console.log(`🚀 ~ jsonPlaceHolder ~ fetchData:`, data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function fin() {
+  console.log("fin");
+}
+
+inicio();
+time();
+promesa(true)
+  .then((element) => {
+    console.log(element);
+    return element.toUpperCase();
+  })
+  .then((element) => {
+    console.log(element);
+    return element.toLowerCase();
+  })
+  .then((element) => console.log(element))
+  .catch((error) => console.log(error))
+  .finally(() => console.log("fin de la promesa"));
+
+pokemon("ditto")
+  .then((data) => data.json())
+  .then((data) => console.log(data))
+  .catch((error) => console.log(error.message));
+
+// jsonPlaceHolder().then(data=>console.log(data))
+jsonPlaceHolder();
+
+fin();
