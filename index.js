@@ -1,64 +1,43 @@
-function inicio() {
-  console.log("inicio");
-}
-function time() {
-  setTimeout(() => {
-    console.log("time");
-  }, 0);
-}
+import fs from "node:fs";
+// console.log(`🚀 ~ fs:`, fs);
 
-function promesa(boolean) {
-  return new Promise((resolve, reject) => {
-    if (boolean) {
-      resolve("Promesa exitosa");
-    } else {
-      reject("Promesa rechazada");
-    }
-  });
-}
-
-function pokemon(name) {
-  return fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
-}
-
-async function jsonPlaceHolder() {
+function readFile() {
   try {
-    const fetchData = await fetch(
-      "https://jsonplaceholde.typicode.com/todos/1"
-    );
-    const data = await fetchData.json();
-    // return data;
-    console.log(`🚀 ~ jsonPlaceHolder ~ fetchData:`, data);
+    const file = fs.readFileSync("./package.jso", "utf-8");
+    console.log(`🚀 ~ readFile ~ file:`, file);
   } catch (error) {
-    console.log(error);
+    appendFile(error);
   }
 }
 
-function fin() {
-  console.log("fin");
+function appendFile(data) {
+  try {
+    const file = fs.appendFileSync("texto.txt", `\n${data}`);
+  } catch (error) {
+    const file = fs.appendFileSync("error.txt", `\n${error}`);
+  }
 }
 
-inicio();
-time();
-promesa(true)
-  .then((element) => {
-    console.log(element);
-    return element.toUpperCase();
-  })
-  .then((element) => {
-    console.log(element);
-    return element.toLowerCase();
-  })
-  .then((element) => console.log(element))
-  .catch((error) => console.log(error))
-  .finally(() => console.log("fin de la promesa"));
+// readFile()
 
-pokemon("ditto")
-  .then((data) => data.json())
-  .then((data) => console.log(data))
-  .catch((error) => console.log(error.message));
+// appendFile("hola");
 
-// jsonPlaceHolder().then(data=>console.log(data))
-jsonPlaceHolder();
+// ------------------------------------------
 
-fin();
+async function readFileAsync() {
+  try {
+    const file = await fs.promises.readFile("./package.json", "utf-8");
+    console.log(`🚀 ~ readFile ~ file:`, file);
+  } catch (error) {
+    appendFile(error);
+  }
+}
+
+readFileAsync()
+
+// function readFileAsync() {
+//   return fs.promises.readFile("./package.json", "utf-8");
+// }
+// readFileAsync()
+//   .then((data) => console.log(data))
+//   .catch((error) => appendFile(error));
