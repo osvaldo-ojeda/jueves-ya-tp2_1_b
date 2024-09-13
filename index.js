@@ -1,15 +1,23 @@
 import { stdin, stdout } from "node:process";
 import commands from "./commands.js";
-// console.log(`🚀 ~ commands:`, commands);
 stdout.write("$ ");
 
 stdin.on("data", function (data) {
-  let cmd = data.toString().trim();
-  if (cmd === "pwd") {
-    commands.pwd();
+  let params = data.toString().trim().split(" ");
+  let cmd = params[0];
+  let param = params.slice(1);
+
+  //     if (cmd === "pwd") {
+  //       commands.pwd();
+  //     }
+  //     if (cmd === "date") {
+  //       commands.date();
+  //     }
+  try {
+    commands[cmd](param);
+    stdout.write("$ ");
+  } catch (error) {
+    stdout.write("$ comando incorrecto \n");
+    stdout.write("$ ");
   }
-  if (cmd === "date") {
-    commands.date();
-  }
-  stdout.write("$ ");
 });
