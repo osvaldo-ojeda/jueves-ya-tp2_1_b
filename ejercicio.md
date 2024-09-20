@@ -1,0 +1,1 @@
+usando los metodos http, hacer un crud de usuarios y lo vamos a manejar en un array de objetos
