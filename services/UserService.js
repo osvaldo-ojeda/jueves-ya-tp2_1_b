@@ -1,12 +1,27 @@
+import {User, Role} from "../models/index.js"
+
 class UserService {
-  getAllUsersService = () => {
-    return "get all users service";
+  getAllUsersService = async () => {
+    try {
+      const data = await User.findAll({
+        attributes:["name"],
+        include:Role
+      });
+      return data;
+    } catch (error) {
+      throw error;
+    }
   };
   getUserByIdService = (id) => {
     return "get user by id service";
   };
-  createUserService = (body) => {
-    return "create user service";
+  createUserService = async (userData) => {
+    try {
+      const data = await User.create(userData);
+      return data;
+    } catch (error) {
+      throw error;
+    }
   };
   updateUserService = (id) => {
     return "update user service";
@@ -16,4 +31,4 @@ class UserService {
   };
 }
 
-export default UserService
+export default UserService;
