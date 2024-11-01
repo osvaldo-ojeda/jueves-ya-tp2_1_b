@@ -1,8 +1,8 @@
 import express from "express";
 import routes from "./routes/routes.js";
 import connection from "./connection/connection.js";
-// import User from "./models/User.js";
-// import Role from "./models/Role.js";
+import { SERVER_PORT } from "./config/config.js";
+import roleSeed from "./seed/roleSeed.js";
 
 const app = express();
 
@@ -18,8 +18,11 @@ app.use((req, res, next) => {
   });
 });
 
-await connection.sync({force:false})
 
-app.listen(8000, () => {
-  console.log(`🚀 ~ app.listen ~ localhost:8000`);
+await connection.sync({ force: true });
+
+await roleSeed()
+
+app.listen(SERVER_PORT, () => {
+  console.log(`🚀 ~ app.listen ~ localhost:${SERVER_PORT}`);
 });

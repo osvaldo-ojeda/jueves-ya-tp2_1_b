@@ -21,8 +21,12 @@ class UserControllers {
   createUser = async (req, res) => {
     try {
       const { name, pass, mail, RoleId } = req.body;
-      const user = await this.userService.createUserService({ name, pass, mail, RoleId });
-      // console.log(`🚀 ~ UserControllers ~ createUser= ~ user:`, user);
+      const user = await this.userService.createUserService({
+        name,
+        pass,
+        mail,
+        RoleId,
+      });
       res.status(200).send({ success: true, message: user });
     } catch (error) {
       res.status(400).send({
@@ -38,6 +42,21 @@ class UserControllers {
   deleteUser = (req, res) => {
     const user = this.userService.deleteUserService();
     res.status(200).send(user);
+  };
+  login = async (req, res) => {
+    try {
+      const { pass, mail } = req.body;
+      const user = await this.userService.loginUserService({
+        pass,
+        mail,
+      });
+      res.status(200).send({ success: true, message: user });
+    } catch (error) {
+      res.status(400).send({
+        success: false,
+        message: error.message,
+      });
+    }
   };
 }
 
