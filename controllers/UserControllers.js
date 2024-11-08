@@ -15,6 +15,8 @@ class UserControllers {
     }
   };
   getUserById = (req, res) => {
+    console.log(`🚀 ~ UserControllers ~ res:`, res)
+    console.log(`🚀 ~ UserControllers ~ req:`, req)
     const user = this.userService.getUserByIdService();
     res.status(200).send(user);
   };
@@ -50,7 +52,26 @@ class UserControllers {
         pass,
         mail,
       });
-      res.status(200).send({ success: true, message: user });
+      // console.log(`🚀 ~ UserControllers ~ login= ~ user:`, user)
+      res.cookie("token", user)
+
+
+      res.status(200).send({ success: true, message: "usario loguado con exito" });
+    } catch (error) {
+      res.status(400).send({
+        success: false,
+        message: error.message,
+      });
+    }
+  };
+  getMe = async (req, res) => {
+    try {
+      const { token } = req.cookies;
+      // console.log(`🚀 ~ UserControllers ~ getMe= ~ token:`, token)
+      const user = await this.userService.me(token);
+      // console.log(`🚀 ~ UserControllers ~ login= ~ user:`, user)
+
+      res.status(200).send({ success: true, message: user});
     } catch (error) {
       res.status(400).send({
         success: false,

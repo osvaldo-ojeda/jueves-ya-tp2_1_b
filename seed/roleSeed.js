@@ -5,3 +5,4 @@ async function roleSeed() {
 }
 
 export default roleSeed;
+
