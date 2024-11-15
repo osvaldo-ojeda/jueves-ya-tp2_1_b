@@ -1,10 +1,13 @@
 import { Router } from "express";
-import userRoutes from "./userRoutes.js";
+import Controllers from "../controllers/Controllers.js";
 
 const routes = Router();
 
-routes.use("/user", userRoutes);
-// routes.use("/roles",rolesRoutes);
+const controller= new Controllers()
+
+routes.get("/:zona", controller.getByZona)
+// routes.get("/", controller.getAll)
+routes.post("/", controller.createVoto)
 
 
 export default routes;
